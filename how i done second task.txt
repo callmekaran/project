@@ -1,0 +1,23 @@
+how i rsync any directory from one ec2 to another ec2
+
+first of all rsync stands for remote synchronization
+
+i made ssh connection beetween two ec2-instance
+
+and then type command 
+
+rsync -[option] current file location usernameofanotherec2instance@privateip
+
+###################### Used Commands 
+
+mkdir karan
+touch ravat.txt
+
+#rsync -a karan client@privateipofthatinstance
+
+#rsync -a ravat.txt client@privateipofthatinstance
+
+###################################
+
+if i had that file already in another instance it will not do overwrite. that is the reason why we use rsync
+
