@@ -1,0 +1,6 @@
+---
+- name: crete vpc
+  remote_user: root
+  hosts: localhost
+  roles:
+   - vpc-role

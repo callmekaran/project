@@ -1,0 +1,71 @@
+---
+
+- name: create vpc
+  ec2_vpc_net:
+    aws_access_key: "{{ ak }}"
+    aws_secret_key: "{{ sk }}"
+    name: test-vpc
+    state: present
+    cidr_block:  "{{ vpc_cidr }}"
+    region: "{{ vpc_region }}"
+    tags:
+      Name: vpc1
+    tenancy: dedicated
+  register: vpc
+
+- name: store fact of vpc id
+  set_fact:
+    vpc_id: "{{ vpc.vpc.id }}"
+
+- name: create a subnet
+  ec2_vpc_subnet:
+    state: present
+    vpc_id: "{{ vpc_id }}"
+    cidr: "{{ subnet_cidr1 }}"
+    aws_access_key: "{{ ak }}"
+    aws_secret_key: "{{ sk }}" 
+    resource_tags:
+      Name: Subnet1
+    region: "{{ subnet_region }}"
+  register: subnet
+
+
+- name: create subnet 2
+  ec2_vpc_subnet:
+    state: present
+    region: "{{ subnet_region }}"
+    vpc_id: "{{ vpc_id }}"
+    cidr: "{{ subnet_cidr2 }}"
+    aws_access_key: "{{ ak }}"
+    aws_secret_key: "{{ sk }}"
+    region: "{{ subnet_region }}"
+    resource_tags:
+      Name: subnet2
+  register: subnet
+
+- name: create a internet gatway
+  ec2_vpc_igw:
+     vpc_id: "{{ vpc_id }}"
+     state: present
+     aws_access_key: "{{ ak }}"
+     aws_secret_key: "{{ sk }}"
+     tags: 
+       Name: ingw
+     region: "{{ subnet_region }}"
+  register: igw
+
+- name: create RT
+  ec2_vpc_route_table:
+    vpc_id: "{{ vpc_id }}"
+    region: us-west-1
+    aws_access_key: "{{ ak }}"
+    aws_secret_key: "{{ sk }}"
+    tags:
+      Name: Public RT
+    subnets:
+      -  "{{ subnet_cidr2 }}"
+      - "{{ subnet_cidr1 }}"
+    routes:
+      - dest: 0.0.0.0/0
+        gateway_id: "{{ igw.gateway_id }}"
+  register: public_route_table

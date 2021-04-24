@@ -1,0 +1,25 @@
+---
+#keys
+
+ak: AKIA6K7OI3N2V4RW6CON
+
+sk: aho2SOP42fYlchMYq+bleprn54kIooKUi0+dsHgQ
+#vpc
+
+vpc_cidr: 192.168.0.0/16
+
+vpc_region: us-west-1
+
+#subnet
+
+subnet_cidr1: 192.168.1.0/24
+
+az1: us-west-1a
+ 
+#subnet
+
+subnet_cidr2: 192.168.2.0/24
+
+subnet_region: us-west-1
+
+
