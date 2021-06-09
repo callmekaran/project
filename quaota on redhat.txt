@@ -1,0 +1,3 @@
+learn quota on redhat
+RAID concept in redhat
+Dns, Dhcp
