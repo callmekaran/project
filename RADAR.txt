@@ -39,3 +39,6 @@ DUCTING: INCREASED BENDING THAT AFFECTS RADAR PERFOMANCE IN SOME SITUATION
 DUTY CYCLE = PRF * PULSE WIDTH, REST TIME: Interval beetw. pulses, PULSE WIDTH: Duration of Pulse
 
 PRF: PRF is the number of pulses transmitted per second & is equal to inverse of PRT, prf = 1/prt  
+
+
+RAJA O RAJA
